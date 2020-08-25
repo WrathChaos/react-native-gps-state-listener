@@ -8,6 +8,8 @@ target 'example' do
 
   use_react_native!(:path => config["reactNativePath"])
 
+  pod 'react-native-gps-state-listener', :path => '../node_modules/react-native-gps-state-listener'
+
   target 'exampleTests' do
     inherit! :complete
     # Pods for testing
@@ -20,14 +22,5 @@ target 'example' do
   use_flipper!
   post_install do |installer|
     flipper_post_install(installer)
-  end
-end
-
-target 'example-tvOS' do
-  # Pods for example-tvOS
-
-  target 'example-tvOSTests' do
-    inherit! :search_paths
-    # Pods for testing
   end
 end
