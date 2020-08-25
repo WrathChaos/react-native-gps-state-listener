@@ -12,7 +12,8 @@
   "dependencies": {
     "react": "16.13.1",
     "react-native": "0.63.2",
-    "react-native-gps-state-listener": "^0.1.0"
+    "react-native-gps-state": "^2.0.3",
+    "react-native-gps-state-listener": "^0.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",

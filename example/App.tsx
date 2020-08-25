@@ -20,30 +20,28 @@ const App = () => {
   const gpsListener = () => {
     console.log('GPS Listener');
     GPSStateListener.addListener((status: any) => {
-      console.log(status);
+      alert(JSON.stringify(status));
       switch (status) {
         case GPSStateListener.NOT_DETERMINED:
-          alert('yes');
+          alert('NOT_DETERMINED');
           break;
         case GPSStateListener.RESTRICTED:
-          {
-            alert('no');
-          }
+          alert('RESTRICTED');
           break;
         case GPSStateListener.DENIED:
-          alert('no');
+          alert('DENIED');
           break;
         case GPSStateListener.AUTHORIZED:
-          alert('yes');
+          alert('AUTHORIZED');
           break;
         case GPSStateListener.AUTHORIZED_ALWAYS:
-          alert('yes');
+          alert('AUTHORIZED_ALWAYS');
           break;
         case GPSStateListener.AUTHORIZED_WHENINUSE:
-          alert('yes');
+          alert('AUTHORIZED_WHENINUSE');
           break;
         default:
-          alert('yes');
+          alert('DEFAULT');
           break;
       }
     });
@@ -56,7 +54,7 @@ const App = () => {
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
-        <Text>Hello</Text>
+        <Text>React Native GPS State Listener</Text>
       </SafeAreaView>
     </>
   );
