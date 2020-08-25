@@ -1,10 +1,10 @@
 
 Pod::Spec.new do |s|
-  s.name         = "RNGpsStateListener"
-  s.version      = "1.0.0"
-  s.summary      = "RNGpsStateListener"
-  s.description  = "RNGpsStateListener Description"
-  s.homepage     = "RNGpsStateListener"
+  s.name         = "react-native-gps-state-listener"
+  s.version      = "1.1.8"
+  s.summary      = "react-native-gps-state-listener"
+  s.description  = "react-native-gps-state-listener Description"
+  s.homepage     = "react-native-gps-state-listener"
   s.license      = "MIT"
   # s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
   s.author             = { "freakycoder" => "kurayogun@gmail.com" }

@@ -38,7 +38,7 @@ _subscription = gpsStateEmitter.addListener("OnStatusChange", (response) => {
   }
 });
 
-export const GPSStateListener = {
+const GPSStateListener = {
   isMarshmallowOrAbove: () => {
     return _isMarshmallowOrAbove;
   },
@@ -87,3 +87,5 @@ export const GPSStateListener = {
 export const isPermissionEquals = (expectedPerm: number) => {
   return _currentStatus == expectedPerm;
 };
+
+export default GPSStateListener;
