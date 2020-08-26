@@ -1,7 +1,7 @@
 {
   "name": "react-native-gps-state-listener",
   "version": "0.1.8",
-  "description": "Extremely easy to create a React Native Component Library with both Stateful and Functional Component Examples.",
+  "description": "Fully functional Natively GPS State Listener for React Native",
   "main": "./build/dist/GPSStateListener.js",
   "repository": "git@github.com:WrathChaos/react-native-gps-state-listener.git",
   "author": "FreakyCoder <kurayogun@gmail.com>",
@@ -9,6 +9,12 @@
   "homepage": "https://www.freakycoder.com",
   "bugs": "https://github.com/WrathChaos/react-native-gps-state-listener/issues",
   "keywords": [
+    "gps",
+    "gps-listener",
+    "gps-state",
+    "location",
+    "global-positioning-system",
+    "listener",
     "FreakyCoder",
     "freakycoder",
     "kuray",

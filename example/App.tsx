@@ -8,29 +8,29 @@ const App = () => {
   }, []);
 
   const gpsListener = () => {
-    GPSStateListener.addListener((status: any) => {
-      alert(JSON.stringify(status));
+    GPSStateListener.addListener((status: number) => {
       switch (status) {
         case GPSStateListener.NOT_DETERMINED:
-          alert("NOT_DETERMINED");
+          console.log("NOT_DETERMINED");
           break;
         case GPSStateListener.RESTRICTED:
-          alert("RESTRICTED");
+          console.log("RESTRICTED");
+          // ? Suggestion: Open settings for the asking the location permission
           break;
         case GPSStateListener.DENIED:
-          alert("DENIED");
+          console.log("DENIED");
           break;
         case GPSStateListener.AUTHORIZED:
-          alert("AUTHORIZED");
+          console.log("AUTHORIZED");
           break;
         case GPSStateListener.AUTHORIZED_ALWAYS:
-          alert("AUTHORIZED_ALWAYS");
+          console.log("AUTHORIZED_ALWAYS");
           break;
         case GPSStateListener.AUTHORIZED_WHENINUSE:
-          alert("AUTHORIZED_WHENINUSE");
+          console.log("AUTHORIZED_WHENINUSE");
           break;
         default:
-          alert("DEFAULT");
+          console.log("DEFAULT");
           break;
       }
     });
