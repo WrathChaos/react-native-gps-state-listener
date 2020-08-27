@@ -1,6 +1,6 @@
 {
   "name": "react-native-gps-state-listener",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "Fully functional Natively GPS State Listener for React Native",
   "main": "./build/dist/GPSStateListener.js",
   "repository": "git@github.com:WrathChaos/react-native-gps-state-listener.git",

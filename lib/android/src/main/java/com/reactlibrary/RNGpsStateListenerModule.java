@@ -74,6 +74,19 @@ public class RNGpsStateListenerModule extends ReactContextBaseJavaModule {
     return "RNGpsStateListener";
   }
 
+
+  @Override
+  public Map<String, Object> getConstants() {
+      final Map<String, Object> constants = new HashMap<>();
+      constants.put("NOT_DETERMINED", STATUS_NOT_DETERMINED);
+      constants.put("RESTRICTED", STATUS_RESTRICTED);
+      constants.put("DENIED", STATUS_DENIED);
+      constants.put("AUTHORIZED", STATUS_AUTHORIZED);
+      constants.put("AUTHORIZED_ALWAYS", STATUS_AUTHORIZED_ALWAYS);
+      constants.put("AUTHORIZED_WHENINUSE", STATUS_AUTHORIZED_WHENINUSE);
+      return constants;
+  }
+
   @ReactMethod
   void startListen() {
       stopListen();
