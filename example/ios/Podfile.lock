@@ -238,7 +238,7 @@ PODS:
   - React-jsinspector (0.63.2)
   - react-native-gps-state (2.0.3):
     - React
-  - react-native-gps-state-listener (1.1.4):
+  - react-native-gps-state-listener (1.1.8):
     - React
   - React-RCTActionSheet (0.63.2):
     - React-Core/RCTActionSheetHeaders (= 0.63.2)
@@ -456,7 +456,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 8ca588cc921e70590820ce72b8789b02c67cce38
   React-jsinspector: b14e62ebe7a66e9231e9581279909f2fc3db6606
   react-native-gps-state: ca94d5e3156fcc1c48c4eaa932910ec481bb5d8c
-  react-native-gps-state-listener: a4d82cf75de450980b4bae6e391e323486f0182a
+  react-native-gps-state-listener: 6fd6b03a71afe51806143209c8754cab60a3ea6c
   React-RCTActionSheet: 910163b6b09685a35c4ebbc52b66d1bfbbe39fc5
   React-RCTAnimation: 9a883bbe1e9d2e158d4fb53765ed64c8dc2200c6
   React-RCTBlob: 39cf0ece1927996c4466510e25d2105f67010e13

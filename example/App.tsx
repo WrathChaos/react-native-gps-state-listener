@@ -7,10 +7,7 @@ import {
   Text,
   StatusBar,
 } from 'react-native';
-import {
-  GPSStateListener,
-  isPermissionEquals,
-} from 'react-native-gps-state-listener';
+import GPSStateListener from 'react-native-gps-state-listener';
 
 const App = () => {
   React.useEffect(() => {
@@ -18,9 +15,8 @@ const App = () => {
   }, []);
 
   const gpsListener = () => {
-    console.log('GPS Listener');
     GPSStateListener.addListener((status: any) => {
-      alert(JSON.stringify(status));
+      alert(status);
       switch (status) {
         case GPSStateListener.NOT_DETERMINED:
           alert('NOT_DETERMINED');
