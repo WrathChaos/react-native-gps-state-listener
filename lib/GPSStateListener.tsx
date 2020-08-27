@@ -5,7 +5,7 @@ import { NativeModules, NativeEventEmitter, Platform } from "react-native";
  */
 import { ListenerFunc, GPSStateType, GPSStateListenerProps } from "./utils";
 
-const GPSStateListenerNative = NativeModules.GPSState;
+const GPSStateListenerNative = NativeModules.RNGpsStateListener;
 const isAndroid = Platform.OS == "android";
 const isIOS = Platform.OS == "ios";
 const gpsStateEmitter = new NativeEventEmitter(GPSStateListenerNative);

@@ -4,10 +4,13 @@ import { GPSStateListener } from "react-native-gps-state-listener";
 
 const App = () => {
   React.useEffect(() => {
+    console.log("GPSStateListener: ", GPSStateListener);
+
     gpsListener();
   }, []);
 
   const gpsListener = () => {
+    console.log("GPSStateListener: ", GPSStateListener);
     GPSStateListener.addListener((status: number) => {
       switch (status) {
         case GPSStateListener.NOT_DETERMINED:
