@@ -1,6 +1,34 @@
 
 package com.reactlibrary;
 
+
+import android.Manifest;
+import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.location.LocationManager;
+import android.net.Uri;
+import android.os.Build;
+import android.provider.Settings;
+import androidx.core.app.ActivityCompat;
+
+import com.facebook.react.ReactActivity;
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.Promise;
+import com.facebook.react.bridge.ReactContext;
+import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
+import com.facebook.react.modules.core.PermissionAwareActivity;
+import com.facebook.react.modules.core.PermissionListener;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
@@ -43,7 +71,19 @@ public class RNGpsStateListenerModule extends ReactContextBaseJavaModule {
 
   @Override
   public String getName() {
-    return "RNGpsStateListener";
+    return "GPSState";
+  }
+
+  @Override
+  public Map<String, Object> getConstants() {
+      final Map<String, Object> constants = new HashMap<>();
+      constants.put("NOT_DETERMINED", STATUS_NOT_DETERMINED);
+      constants.put("RESTRICTED", STATUS_RESTRICTED);
+      constants.put("DENIED", STATUS_DENIED);
+      constants.put("AUTHORIZED", STATUS_AUTHORIZED);
+      constants.put("AUTHORIZED_ALWAYS", STATUS_AUTHORIZED_ALWAYS);
+      constants.put("AUTHORIZED_WHENINUSE", STATUS_AUTHORIZED_WHENINUSE);
+      return constants;
   }
 
   @ReactMethod
@@ -76,6 +116,25 @@ public class RNGpsStateListenerModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
+    public void requestAuthorization() {
+        if (_NativeIsDeviceMOrAbove()) {
+            String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION};
+            Activity activity = getCurrentActivity();
+            int requestCode = REQUEST_CODE_AUTHORIZATION;
+
+            if (activity instanceof ReactActivity) {
+                ((ReactActivity) activity).requestPermissions(permissions, requestCode, listener);
+
+            } else if (activity instanceof PermissionAwareActivity) {
+                ((PermissionAwareActivity) activity).requestPermissions(permissions, requestCode, listener);
+
+            } else {
+                ActivityCompat.requestPermissions(activity, permissions, requestCode);
+            }
+        }
+    }
+
+  @ReactMethod
   void isMarshmallowOrAbove(Promise promise) {
       promise.resolve(_NativeIsDeviceMOrAbove());
   }
@@ -87,6 +146,15 @@ public class RNGpsStateListenerModule extends ReactContextBaseJavaModule {
   boolean _NativeIsTargetMOrAbove() {
       return targetSdkVersion >= Build.VERSION_CODES.M;
   }
+
+  private PermissionListener listener = new PermissionListener() {
+    public boolean onRequestPermissionsResult(final int requestCode, final String[] permissions, final int[] grantResults) {
+        if (requestCode == REQUEST_CODE_AUTHORIZATION) {
+            sendEvent(getGpsState());
+        }
+        return true;
+    }
+};
 
   int getGpsState() {
     int status;
@@ -110,6 +178,15 @@ public class RNGpsStateListenerModule extends ReactContextBaseJavaModule {
 
     currentStatus = status;
     return status;
+}
+
+int getPermission() {
+    return ActivityCompat.checkSelfPermission(getReactApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION);
+}
+
+boolean isPermissionGranted() {
+    int permission = getPermission();
+    return permission == PackageManager.PERMISSION_GRANTED;
 }
 
 
