@@ -23,7 +23,7 @@ Add the dependency:
 npm i react-native-gps-state-listener
 ```
 
-## iOS (Important!)
+## iOS Installation
 
 Go to your root ios folder and open up the `Podfile`
 
@@ -39,13 +39,13 @@ Then, run the pod install command:
 npx pod-install
 ```
 
-## Android Manual Installation
+## Android Installation
 
 **android/settings.gradle**
 
 ```gradle
 include ':react-native-gps-state-listener'
-project(':react-native-gps-state-listener').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-gps-state-listener/android')
+project(':react-native-gps-state-listener').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-gps-state-listener/lib/android')
 ```
 
 **android/app/build.gradle**
@@ -54,26 +54,6 @@ project(':react-native-gps-state-listener').projectDir = new File(rootProject.pr
 dependencies {
    ...
    implementation project(':react-native-gps-state-listener')
-}
-```
-
-**MainApplication.java**
-
-On top, where imports are:
-
-```java
-import com.reactLibrary.RNGpsStateListenerPackage;
-```
-
-Add the `new RNGpsStateListenerPackage()` class to your list of exported packages.
-
-```java
-@Override
-protected List<ReactPackage> getPackages() {
-    return Arrays.asList(
-            new MainReactPackage(),
-            new RNGpsStateListenerPackage(),
-    );
 }
 ```
 
