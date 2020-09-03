@@ -56,6 +56,7 @@ public class RNGpsStateListenerModule extends ReactContextBaseJavaModule {
   private int deviceSdkVersion = Build.VERSION.SDK_INT;
   private int currentStatus = STATUS_NOT_DETERMINED;
 
+  // ? Constructor
   public RNGpsStateListenerModule(ReactApplicationContext reactContext) {
     super(reactContext);
     this.reactContext = reactContext;
@@ -156,60 +157,60 @@ public class RNGpsStateListenerModule extends ReactContextBaseJavaModule {
     }
 };
 
-  int getGpsState() {
-    int status;
-    boolean enabled = isGpsEnabled();
+    int getGpsState() {
+        int status;
+        boolean enabled = isGpsEnabled();
 
-    if (_NativeIsDeviceMOrAbove()) {
-        boolean isGranted = isPermissionGranted();
+        if (_NativeIsDeviceMOrAbove()) {
+            boolean isGranted = isPermissionGranted();
 
-        if (enabled) {
-            if (isGranted) {
-                status = STATUS_AUTHORIZED;
+            if (enabled) {
+                if (isGranted) {
+                    status = STATUS_AUTHORIZED;
+                } else {
+                    status = STATUS_DENIED;
+                }
             } else {
-                status = STATUS_DENIED;
+                status = STATUS_RESTRICTED;
             }
         } else {
-            status = STATUS_RESTRICTED;
+            status = (enabled ? STATUS_AUTHORIZED : STATUS_RESTRICTED);
         }
-    } else {
-        status = (enabled ? STATUS_AUTHORIZED : STATUS_RESTRICTED);
+
+        currentStatus = status;
+        return status;
     }
 
-    currentStatus = status;
-    return status;
-}
+    int getPermission() {
+        return ActivityCompat.checkSelfPermission(getReactApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION);
+    }
 
-int getPermission() {
-    return ActivityCompat.checkSelfPermission(getReactApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION);
-}
-
-boolean isPermissionGranted() {
-    int permission = getPermission();
-    return permission == PackageManager.PERMISSION_GRANTED;
-}
+    boolean isPermissionGranted() {
+        int permission = getPermission();
+        return permission == PackageManager.PERMISSION_GRANTED;
+    }
 
 
-boolean isGpsEnabled() {
-  return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-}
+    boolean isGpsEnabled() {
+    return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+    }
 
-void sendEvent(int status) {
-  ReactContext reactContext = getReactApplicationContext();
-  WritableMap params = Arguments.createMap();
-  params.putInt("status", status);
+    void sendEvent(int status) {
+    ReactContext reactContext = getReactApplicationContext();
+    WritableMap params = Arguments.createMap();
+    params.putInt("status", status);
 
-  reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_STATUS_CHANGE, params);
-}
+    reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_STATUS_CHANGE, params);
+    }
 
-private final class GPSProvideChangeReceiver extends BroadcastReceiver {
-  @Override
-  public void onReceive(Context context, Intent intent) {
-      String action = intent.getAction();
-      if (action.matches("android.location.PROVIDERS_CHANGED")) {
-          sendEvent(getGpsState());
-      }
-  }
-}
+    private final class GPSProvideChangeReceiver extends BroadcastReceiver {
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        String action = intent.getAction();
+        if (action.matches("android.location.PROVIDERS_CHANGED")) {
+            sendEvent(getGpsState());
+        }
+    }
+    }
 
 }

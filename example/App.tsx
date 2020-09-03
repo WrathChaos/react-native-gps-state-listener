@@ -6,6 +6,7 @@ import {
   View,
   Text,
   StatusBar,
+  NativeModules,
 } from 'react-native';
 import GPSStateListener from 'react-native-gps-state-listener';
 

@@ -3,7 +3,7 @@ import { NativeModules, NativeEventEmitter, Platform } from "react-native";
 /**
  * ? Local Imports
  */
-import { ListenerFunc, GPSStateType, GPSStateListenerProps } from "./utils";
+import { ListenerFunc, GPSStateType } from "./utils";
 
 const GPSStateListenerNative = NativeModules.GPSState;
 const isAndroid = Platform.OS == "android";
