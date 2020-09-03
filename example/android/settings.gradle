@@ -1,5 +1,5 @@
 rootProject.name = 'example'
 apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
-include ':react-native-gps-state-listener'
-project(':react-native-gps-state-listener').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-gps-state-listener/lib/android')
+include ':react-native-gps-state'
+project(':react-native-gps-state').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-gps-state-listener/lib/android')
 include ':app'
